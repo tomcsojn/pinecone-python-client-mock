@@ -28,8 +28,8 @@ class IndexObject:
 
 # Mock the Pinecone Index class
 class Index:
-    def __init__(self, index: str):
-        self.index = index
+    def __init__(self, index_name: str):
+        self.index = index_name
         self.index_config = CONFIG["indexes"][index]
 
     def upsert(self, vectors: List[tuple], namespace: str = ""):

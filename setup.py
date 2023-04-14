@@ -7,7 +7,7 @@ requirements = ["pandas>=1.3.4","typing-extensions>=3.7.4","numpy"]
 
 setup(
     name="pinecone_python_client_mock",
-    version="0.1.0",
+    version="0.0.0",
     author="Tamás Majszlinger",
     author_email="tomcsojn@gmail.com",
     description="pinecone python client mocking class for testing purposes",
