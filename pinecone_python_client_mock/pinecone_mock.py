@@ -40,7 +40,10 @@ class Index:
             # Extract info from tuple
             _id = record[0]
             vector = record[1]
-            metadata = record[2]
+            if (len(record) < 3):
+                metadata = {}
+            else:
+                metadata = record[2]
             # Checks
             assert type(_id) is str
             assert type(vector) is list
