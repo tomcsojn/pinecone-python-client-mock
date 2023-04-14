@@ -30,7 +30,7 @@ class IndexObject:
 class Index:
     def __init__(self, index_name: str):
         self.index = index_name
-        self.index_config = CONFIG["indexes"][index]
+        self.index_config = CONFIG["indexes"][index_name]
 
     def upsert(self, vectors: List[tuple], namespace: str = ""):
         if namespace not in self.index_config.namespaces:
