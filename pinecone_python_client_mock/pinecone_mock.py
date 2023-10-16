@@ -1,4 +1,4 @@
-from typing import Optional, List
+from typing import Optional, List, Dict
 
 # Mock Pinecone instance
 CONFIG: dict = {"api_key": None, "environment": None, "indexes": {}}
@@ -54,6 +54,22 @@ class Index:
             self.index_config.namespaces[namespace].append(new_record)
             upsert_count += 1
         return {"upserted_count": upsert_count}
+    
+
+    def update(self, id:str, values:Optional[List]=None, set_metadata:Optional[Dict[str, str]]=None, namespace:str = ""):
+        if namespace not in self.index_config.namespaces:
+            self.index_config.namespaces[namespace] = []
+        
+        record = self.fetch(ids=[id], namespace=namespace)['vectors'][id].copy()
+        if values:
+            print('setting values')
+            record['values'] = values
+        if set_metadata:
+            print('setting metadata')
+            record['metadata'].update(set_metadata)
+        upsert_record = (record['id'], record['values'], record['metadata'])
+        self.delete(ids=[id], namespace=namespace)
+        self.upsert(vectors=[upsert_record], namespace=namespace) 
 
     def describe_index_stats(self):
         namespaces = {}
